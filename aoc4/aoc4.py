@@ -10,8 +10,10 @@ count2 = 0
 for i, j in product(range(n), range(m)):
     if data[i][j] == 'X':
         for di,dj in product([-1,0,1],[-1,0,1]):
-            if (di,dj) != (0,0) and 0 <= i+3*di < n and 0 <= j+3*dj < m:
-                if ''.join(data[i+k*di][j+k*dj] for k in range(4)) == 'XMAS':
+            if ((di,dj) != (0,0) and 
+                0 <= i+3*di < n and 
+                0 <= j+3*dj < m and
+                ''.join(data[i+k*di][j+k*dj] for k in range(4)) == 'XMAS'):
                     count1 += 1
     if (data[i][j] == 'A' and 
         i not in (0,n-1) and 
