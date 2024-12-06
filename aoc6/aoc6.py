@@ -10,16 +10,19 @@ m = len(data[0])
 i, j = next((i, j) for i, j in product(range(n), range(m)) if data[i][j] == '^')
 di, dj = -1, 0
 
+def valid(i,j):
+    return 0 <= i < n and 0 <= j < m
+
 def run(i, j, di, dj):
     visited = defaultdict(set)
     while True:
         visited[(i,j)].add((di, dj))
-        while 0 <= i+di < n and 0 <= j+dj < m and data[i+di][j+dj] == '#':
+        while valid(i+di, j+dj) and data[i+di][j+dj] == '#':
             di, dj = dj, -di
             visited[(i,j)].add((di,dj))
         i += di
         j += dj
-        if not (0 <= i < n and 0 <= j < m):
+        if not valid(i,j):
             # We finished
             return visited, False
         if (di,dj) in visited[(i,j)]:
