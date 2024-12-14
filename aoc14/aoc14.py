@@ -1,9 +1,8 @@
 import re
 from math import prod
 import matplotlib.pyplot as plt
-from itertools import count
-pat = re.compile(r'p=(-?\d+),(-?\d+) v=(-?\d+),(-?\d+)')
 
+pat = re.compile(r'p=(-?\d+),(-?\d+) v=(-?\d+),(-?\d+)')
 data = [[int(s) for s in pat.match(line).groups()] for line in open('input.txt')]
 
 #n,m = 7,11
