@@ -16,20 +16,14 @@ ops = {0: lambda op, i, a, b, c: (i+2, a//(2**combo(op, a, b, c)), b, c, None),
        6: lambda op, i, a, b, c: (i+2, a, a//(2**combo(op, a, b, c)), c, None),
        7: lambda op, i, a, b, c: (i+2, a, b, a//(2**combo(op, a, b, c)), None)}
 
-def singleout(i, a, b, c):
-    while i < len(code):
-        i, a, b, c, out = ops[code[i]](code[i+1], i, a, b, c)
-        if out is not None:
-            return i, a, b, c, out
-    return i, a, b, c, None
-
 def run(a, b, c):
     output = []
     i = 0
     while i < len(code):
-        i, a, b, c, out = singleout(i, a, b, c)
-        output.append(out)
-    return [x for x in output if x is not None]
+        i, a, b, c, out = ops[code[i]](code[i+1], i, a, b, c)
+        if out is not None:
+            output.append(out)
+    return output
 
 print('Part 1:', ','.join(map(str, run(a, b, c))))
 
